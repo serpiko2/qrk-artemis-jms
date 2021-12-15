@@ -58,12 +58,12 @@ public class JmsConsumer {
         Message message = consumer.receive();
         if (message == null) return messageList;
         messageList.add(message.getBody(String.class));
-        context.acknowledge();
+        //context.acknowledge();
       }
     } catch (JMSException e) {
       throw new RuntimeException(e);
     } finally {
-      context.commit();
+      //context.commit();
     }
     return messageList;
   }
