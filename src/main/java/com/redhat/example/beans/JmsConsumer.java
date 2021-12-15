@@ -63,7 +63,6 @@ public class JmsConsumer {
     } catch (JMSException e) {
       throw new RuntimeException(e);
     } finally {
-      System.out.println("committing");
       context.commit();
     }
     return messageList;
