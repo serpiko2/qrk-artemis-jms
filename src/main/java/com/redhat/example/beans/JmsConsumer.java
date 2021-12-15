@@ -19,7 +19,7 @@ public class JmsConsumer {
   ConnectionFactory connectionFactory;
 
   public List<String> consumeOnQueue(JmsConsumeModel.Queue model) {
-    try (JMSContext context = connectionFactory.createContext(Session.SESSION_TRANSACTED)) {
+    try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)) {
       JMSConsumer consumer = context.createConsumer(context.createQueue(model.destination));
       return consume(model.number, consumer, context);
     }
@@ -27,7 +27,7 @@ public class JmsConsumer {
 
   public List<String> consumeOnDurableTopic(JmsConsumeModel.Topic model) {
     List<String> result;
-    try (JMSContext context = connectionFactory.createContext(Session.SESSION_TRANSACTED)) {
+    try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)) {
       context.setClientID(clientId);
       JMSConsumer consumer =
           context.createDurableConsumer(context.createTopic(model.destination), model.clientId);
@@ -37,7 +37,7 @@ public class JmsConsumer {
   }
 
   public List<String> consumeOnSharedDurableTopic(JmsConsumeModel.Topic model) {
-    try (JMSContext context = connectionFactory.createContext(Session.SESSION_TRANSACTED)) {
+    try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)) {
       JMSConsumer consumer =
           context.createSharedDurableConsumer(context.createTopic(model.destination), model.clientId);
       return consume(model.number, consumer, context);
@@ -45,7 +45,7 @@ public class JmsConsumer {
   }
 
   public List<String> consumeOnNonDurableTopic(JmsConsumeModel model) {
-    try (JMSContext context = connectionFactory.createContext(Session.CLIENT_ACKNOWLEDGE)) {
+    try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)) {
       JMSConsumer consumer = context.createConsumer(context.createTopic(model.destination));
       return consume(model.number, consumer, context);
     }
