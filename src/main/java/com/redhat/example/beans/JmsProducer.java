@@ -1,6 +1,5 @@
 package com.redhat.example.beans;
 
-import com.redhat.example.Address;
 import com.redhat.example.models.JmsProduceModel;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -18,13 +18,13 @@ public class JmsConsumerResource {
 
   @POST
   @Path("/queue")
-  public List<String> consumeMessageOnQueue(JmsConsumeModel getMessageBody) {
+  public List<String> consumeMessageOnQueue(JmsConsumeModel.Queue getMessageBody) {
     return jmsConsumer.consumeOnQueue(getMessageBody);
   }
 
   @POST
   @Path("/topic")
-  public List<String> postMessageOnTopic(JmsConsumeModel getMessageBody) {
+  public List<String> postMessageOnTopic(JmsConsumeModel.Topic getMessageBody) {
     if(getMessageBody.durable) {
       if(getMessageBody.shared) {
         return jmsConsumer.consumeOnSharedDurableTopic(getMessageBody);
